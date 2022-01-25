@@ -1,0 +1,9 @@
+﻿global using Airport.Worker;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.EntityFrameworkCore;
+global using Airport.Models;
+global using Airport.DataBase;
+global using System.Text.Json;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Diagnostics;
+global using Airport.Repasitory;
