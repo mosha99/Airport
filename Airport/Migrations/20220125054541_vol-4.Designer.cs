@@ -4,6 +4,7 @@ using Airport.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Migrations
 {
     [DbContext(typeof(AirplantContext))]
-    partial class AirplantContextModelSnapshot : ModelSnapshot
+    [Migration("20220125054541_vol-4")]
+    partial class vol4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,40 +213,6 @@ namespace Airport.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pasengers");
-                });
-
-            modelBuilder.Entity("Airport.Models.Work", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ConnectionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FlightsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Pasengerid")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Success")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TypeOfWork")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("cheack")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Works");
                 });
 
             modelBuilder.Entity("Airport.Models.Flighpass", b =>

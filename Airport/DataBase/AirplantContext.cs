@@ -16,6 +16,7 @@ namespace Airport.DataBase
 
 
         public virtual DbSet<Pasenger> Pasengers { get; set; }
+        public virtual DbSet<Work> Works { get; set; }
         public virtual DbSet<Airplans> Airplans { get; set; }
         public virtual DbSet<Flights> Flights { get; set; }
         public virtual DbSet<Flighpass> Flighpasses { get; set; }

@@ -2,16 +2,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-//builder.Services.AddSingleton<IWorkerList, WorkerList>();
-builder.Services.AddSingleton<IWorker, Worker>();
-
-builder.Services.AddTransient<AirplantContext>();
-
-
-builder.Services.AddTransient<IReadRepasitory,ReadRepasitory>();
+builder.Services.AddDbContext<AirplantContext>(ServiceLifetime.Transient);
+builder.Services.AddTransient<IReadRepasitory, ReadRepasitory>();
 builder.Services.AddTransient<IQueueRepasitory, QueueRepasitory>();
 builder.Services.AddTransient<ISimpelWrite, SimpelWrite>();
+builder.Services.AddTransient<IWorkRepository, WorkRepository>();
+
+
+var sp = builder.Services.BuildServiceProvider();
+Worker worker = new Worker(sp);
+
+builder.Services.AddSingleton(typeof(Worker), worker);
+
+//builder.Logging.AddFilter((a, Loglevel) => { if (Loglevel != LogLevel.Error ) return false; else return true; });
 
 
 var app = builder.Build();
@@ -26,7 +29,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthorization();

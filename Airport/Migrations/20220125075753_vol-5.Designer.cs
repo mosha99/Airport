@@ -4,6 +4,7 @@ using Airport.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Migrations
 {
     [DbContext(typeof(AirplantContext))]
-    partial class AirplantContextModelSnapshot : ModelSnapshot
+    [Migration("20220125075753_vol-5")]
+    partial class vol5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,17 +226,11 @@ namespace Airport.Migrations
                     b.Property<string>("ConnectionId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("FlightsId")
                         .HasColumnType("int");
 
                     b.Property<int>("Pasengerid")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Success")
-                        .HasColumnType("bit");
 
                     b.Property<int>("TypeOfWork")
                         .HasColumnType("int");

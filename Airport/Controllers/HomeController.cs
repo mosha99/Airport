@@ -8,38 +8,34 @@ public class HomeController : Controller
 
     IReadRepasitory _readRepasitory;
     ISimpelWrite _simpelWrite;
-    protected IWorker wr;
-    protected IWorkerList wrl;
+    protected Worker.Worker wr;
+    IWorkRepository _workerRip;
     public HomeController(
         ILogger<HomeController> logger,
-        //IWorkerList workerList,
-        IWorker worker,
+        Worker.Worker worker,
         IReadRepasitory readRepasitory,
-        ISimpelWrite simpelWrite
+        ISimpelWrite simpelWrite,
+        IWorkRepository workerRip
         )
     {
-        //wrl = workerList;
+        _workerRip = workerRip;
         wr = worker;
         _readRepasitory = readRepasitory;
         _simpelWrite = simpelWrite;
-
         _logger = logger;
     }
 
-    public int Index()
+    public async Task<IActionResult> Index()
     {
-        return WorkerList.works.Count();
+        await _simpelWrite.AddPasenger(new Pasenger() {Name="moein" , IsDeleted=false , UpdateDate=DateTime.Now , CreatDate=DateTime.Now });
+        return View();
     }
 
-    public async Task Privacy( int q,int r)
+    public async Task Privacy(int q, int r)
     {
-        Work w = new Work() {ConnectionId="2" ,FlightsId =q , Pasengerid = r };
-        //wrl.works.Add(w);
-        WorkerList.works.Add(w);
-        Console.WriteLine(WorkerList.works.Count());
-       // int x =  wrl.AddWork(w);
-       // Console.WriteLine(x);
-       // return x;
+        Work w = new Work() { ConnectionId = "2", FlightsId = q, Pasengerid = r };
+        await _workerRip.Add(w);
+        //wr.runt();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

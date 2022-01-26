@@ -9,6 +9,7 @@
         public SimpelWrite(AirplantContext DataBase)
         {
             _DataBase = DataBase;
+        
         }
 
 
@@ -26,7 +27,7 @@
 
         }
 
-        public async Task AddFlight(int startlocId, int endlocId, int AirplaneId ,Flights flight)
+        public async Task AddFlight(int startlocId, int endlocId, int AirplaneId, Flights flight)
         {
             var startloc = _DataBase.AirPorts.FirstOrDefault(x => x.Id == startlocId);
             var endloc = _DataBase.AirPorts.FirstOrDefault(x => x.Id == endlocId);
@@ -46,8 +47,17 @@
 
         public async Task AddPasenger(Pasenger pasenger)
         {
-            _DataBase.Pasengers.Add(pasenger);
-            await _DataBase.SaveChangesAsync();
+            try
+            {
+                _DataBase.Pasengers.Add(pasenger);
+                await _DataBase.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
 
         }
 
